@@ -1,0 +1,15 @@
+spring:
+  datasource:
+#    url: jdbc:mysql://39.106.49.196:3306/pms_java?characterEncoding=utf8
+    url: jdbc:log4jdbc:mysql://39.106.49.196:3306/pms_java?characterEncoding=utf8
+#    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: net.sf.log4jdbc.DriverSpy
+    username: wzc
+    password: wzc
+  jpa:
+    database: MySQL
+    show-sql: true
+    hibernate:
+#      physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
