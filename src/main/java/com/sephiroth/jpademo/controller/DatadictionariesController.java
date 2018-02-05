@@ -1,7 +1,7 @@
 package com.sephiroth.jpademo.controller;
 
-import com.sephiroth.jpademo.entity.E_datadictionaries;
-import com.sephiroth.jpademo.jpadao.JPA_datadictionaries;
+import com.sephiroth.jpademo.entity.E_SysDatadictionaries;
+import com.sephiroth.jpademo.jpadao.JPA_SysDatadictionaries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +17,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/datadictionaries")
-public class datadictionariesController {
+public class DatadictionariesController {
 
     @Autowired
-    private JPA_datadictionaries jpa_datadictionaries;
+    private JPA_SysDatadictionaries jpa_datadictionaries;
 
     /**
      *  @Author: 吴占超
@@ -29,7 +29,7 @@ public class datadictionariesController {
      *  @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public List<E_datadictionaries> e_datadictionariesList() {
+    public List<E_SysDatadictionaries> e_datadictionariesList() {
         return jpa_datadictionaries.findAll();
     }
 
@@ -41,12 +41,12 @@ public class datadictionariesController {
      *  @return
      */
     @RequestMapping(value = "/save",method = RequestMethod.GET)
-    public E_datadictionaries save(E_datadictionaries entity) {
+    public E_SysDatadictionaries save(E_SysDatadictionaries entity) {
         return jpa_datadictionaries.save(entity);
     }
 
     @RequestMapping(value = "/delete")
-    public List<E_datadictionaries> delete(String id) {
+    public List<E_SysDatadictionaries> delete(String id) {
         jpa_datadictionaries.delete(id);
         return jpa_datadictionaries.findAll();
     }

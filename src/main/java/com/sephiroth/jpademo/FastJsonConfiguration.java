@@ -4,14 +4,16 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *  @Author: 吴占超
- *  @Description:
+ *  @Description: Durid 配置
  *  @Date:  21:17 2018/2/4
  *
  */
@@ -42,6 +44,10 @@ public class FastJsonConfiguration extends WebMvcConfigurerAdapter
         // WriteNullBooleanAsFalse：Boolean字段如果为null,输出为false,而非null
         // WriteMapNullValue：是否输出值为null的字段,默认为false。
 
+        //处理中文乱码问题
+        List<MediaType> fastMediaType = new ArrayList<>();
+        fastMediaType.add(MediaType.APPLICATION_JSON_UTF8);
+        fastConverter.setSupportedMediaTypes(fastMediaType);
         fastConverter.setFastJsonConfig(fastJsonConfig);
         //将fastjson添加到视图消息转换器列表内
         converters.add(fastConverter);
