@@ -20,7 +20,7 @@ public class IndexController {
      *  @Date:  21:33 2018/2/5
      *  @return 登陆页
      */
-    @RequestMapping(value = "login",method = RequestMethod.GET)
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login() {
         return "login";
     }
@@ -31,7 +31,7 @@ public class IndexController {
      *  @Date:  21:34 2018/2/5
      *  @return 主页
      */
-    @RequestMapping(value = "index",method = RequestMethod.GET)
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index() {
         return "index";
     }
