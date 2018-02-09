@@ -13,6 +13,7 @@ public class E_TLogger  implements Serializable {
   /**
    * null
    */
+  @Id
   @GenericGenerator(name = "user-uuid", strategy = "uuid")
   @GeneratedValue(generator = "user-uuid")
   @Column(name = "id", nullable = false, length = 64)

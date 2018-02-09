@@ -1,7 +1,7 @@
 package com.sephiroth.jpademo;
 
+import com.sephiroth.jpademo.interceptor.LoggerInterceptor;
 import com.sephiroth.jpademo.interceptor.SessionInterceptor;
-import org.omg.PortableInterceptor.InterceptorOperations;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,5 +18,6 @@ public class SessionConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new LoggerInterceptor()).addPathPatterns("/**");
     }
 }

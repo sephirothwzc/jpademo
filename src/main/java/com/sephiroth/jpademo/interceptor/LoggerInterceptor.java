@@ -8,6 +8,8 @@ import com.sephiroth.jpademo.entity.E_TLogger;
 import com.sephiroth.jpademo.iiteral.IiteralLogger;
 import com.sephiroth.jpademo.iiteral.IiteralSession;
 import com.sephiroth.jpademo.jpadao.JPA_TLogger;
+import org.springframework.core.MethodParameter;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,12 +51,12 @@ public class LoggerInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest var1, HttpServletResponse var2, Object var3, ModelAndView var4) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) throws Exception {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) throws Exception {
         // 获取对象
         E_TLogger logger = (E_TLogger)request.getAttribute(IiteralLogger.LOGGER_ENTITY);
         // 请求错误码
@@ -66,8 +68,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
         logger.setAliReturnTime(new Timestamp(etime));
         logger.setAliTimeConsuming(etime-stime);
         logger.setAliDatetime(new Timestamp(stime));
-        // 设置返回值
-        //response.get
+        // endregion
         logger.setAliReturnData(JSON.toJSONString(request.getAttribute(IiteralLogger.LOGGER_RETURN),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteMapNullValue));
