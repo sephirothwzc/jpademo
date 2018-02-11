@@ -1,7 +1,7 @@
 package com.sephiroth.jpademo.controller;
 
-import com.sephiroth.jpademo.entity.E_SysDatadictionaries;
-import com.sephiroth.jpademo.jpadao.JPA_SysDatadictionaries;
+import com.sephiroth.jpademo.entity.EntitySysDatadictionaries;
+import com.sephiroth.jpademo.jpadao.JpaSysDatadictionaries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +20,7 @@ import java.util.List;
 public class DatadictionariesController {
 
     @Autowired
-    private JPA_SysDatadictionaries jpa_datadictionaries;
+    private JpaSysDatadictionaries jpa_datadictionaries;
 
     /**
      *  @Author: 吴占超
@@ -29,7 +29,7 @@ public class DatadictionariesController {
      *  @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public List<E_SysDatadictionaries> e_datadictionariesList() {
+    public List<EntitySysDatadictionaries> e_datadictionariesList() {
         return jpa_datadictionaries.findAll();
     }
 
@@ -41,13 +41,24 @@ public class DatadictionariesController {
      *  @return
      */
     @RequestMapping(value = "/save",method = RequestMethod.GET)
-    public E_SysDatadictionaries save(E_SysDatadictionaries entity) {
+    public EntitySysDatadictionaries save(EntitySysDatadictionaries entity) {
         return jpa_datadictionaries.save(entity);
     }
 
     @RequestMapping(value = "/delete")
-    public List<E_SysDatadictionaries> delete(String id) {
+    public List<EntitySysDatadictionaries> delete(String id) {
         jpa_datadictionaries.delete(id);
+        return jpa_datadictionaries.findAll();
+    }
+
+    @RequestMapping(value = "/en")
+    public List<EntitySysDatadictionaries> eanble(String eanble) {
+        return jpa_datadictionaries.useGetEnableflag(eanble);
+    }
+
+    @RequestMapping(value = "/del")
+    public List<EntitySysDatadictionaries> deleteForCodeName(EntitySysDatadictionaries entity) {
+        jpa_datadictionaries.deleteQuery(entity.getCode(),entity.getName());
         return jpa_datadictionaries.findAll();
     }
 }

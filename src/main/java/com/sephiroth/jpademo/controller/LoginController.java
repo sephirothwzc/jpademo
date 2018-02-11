@@ -1,8 +1,8 @@
 package com.sephiroth.jpademo.controller;
 
-import com.sephiroth.jpademo.entity.E_SysUser;
+import com.sephiroth.jpademo.entity.EntitySysUser;
 import com.sephiroth.jpademo.iiteral.IiteralSession;
-import com.sephiroth.jpademo.jpadao.JPA_SysUser;
+import com.sephiroth.jpademo.jpadao.JpaSysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
@@ -27,15 +27,15 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Autowired
-    private JPA_SysUser jpa_sysUser;
+    private JpaSysUser jpa_sysUser;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public String login(E_SysUser user, HttpServletRequest request) {
+    public String login(EntitySysUser user, HttpServletRequest request) {
         // 根据用户名查询用户是否存在
-        E_SysUser sysUser = jpa_sysUser.findOne(new Specification<E_SysUser>() {
+        EntitySysUser sysUser = jpa_sysUser.findOne(new Specification<EntitySysUser>() {
             @Override
-            public Predicate toPredicate(Root<E_SysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 criteriaQuery.where(criteriaBuilder.equal(root.get("username"),user.getUsername()));
                 return null;
             }

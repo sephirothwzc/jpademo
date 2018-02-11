@@ -3,13 +3,11 @@ package com.sephiroth.jpademo.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sephiroth.jpademo.commtools.helper.WebAppContextHelper;
-import com.sephiroth.jpademo.entity.E_SysUser;
-import com.sephiroth.jpademo.entity.E_TLogger;
+import com.sephiroth.jpademo.entity.EntitySysUser;
+import com.sephiroth.jpademo.entity.EntityTLogger;
 import com.sephiroth.jpademo.iiteral.IiteralLogger;
 import com.sephiroth.jpademo.iiteral.IiteralSession;
-import com.sephiroth.jpademo.jpadao.JPA_TLogger;
-import org.springframework.core.MethodParameter;
-import org.springframework.web.method.HandlerMethod;
+import com.sephiroth.jpademo.jpadao.JpaTLogger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +26,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         // 日志对象
-        E_TLogger logger = new E_TLogger();
+        EntityTLogger logger = new EntityTLogger();
         // 请求的sessionid 获取
         logger.setSessionId(request.getRequestedSessionId());
         // 请求路径
@@ -58,7 +56,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) throws Exception {
         // 获取对象
-        E_TLogger logger = (E_TLogger)request.getAttribute(IiteralLogger.LOGGER_ENTITY);
+        EntityTLogger logger = (EntityTLogger)request.getAttribute(IiteralLogger.LOGGER_ENTITY);
         // 请求错误码
         logger.setHttpStatusCode(String.valueOf(response.getStatus()));
         // 请求开始时间
@@ -74,11 +72,11 @@ public class LoggerInterceptor implements HandlerInterceptor {
                 SerializerFeature.WriteMapNullValue));
         // 设置登陆对象
         Object obj = request.getSession().getAttribute(IiteralSession.user);
-        if(null == obj) {
-            logger.setTokenUser(((E_SysUser)obj).getId());
+        if(null != obj) {
+            logger.setTokenUser(((EntitySysUser)obj).getId());
         }
         // 写入数据库
-        JPA_TLogger jpaTLogger = new WebAppContextHelper().getJPADAO(JPA_TLogger.class,request);
+        JpaTLogger jpaTLogger = new WebAppContextHelper().getJPADAO(JpaTLogger.class,request);
         jpaTLogger.save(logger);
     }
 }

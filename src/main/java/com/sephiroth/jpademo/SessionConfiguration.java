@@ -4,6 +4,7 @@ import com.sephiroth.jpademo.interceptor.LoggerInterceptor;
 import com.sephiroth.jpademo.interceptor.SessionInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -19,5 +20,11 @@ public class SessionConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new LoggerInterceptor()).addPathPatterns("/**");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry){
+        // 静态资源拦截
+        registry.addResourceHandler("/ava/**").addResourceLocations("classpath:/static/");
     }
 }
