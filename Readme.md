@@ -18,3 +18,24 @@
     9. service服务层
     10. jpadao数据持久层（DAO）
 
+## 2018-02-12 吴占超
+1. Spring Data Jpa 分页
+    @RequestMapping(value = "/manager")
+    public BaseResult cutUserPage(InCutUsePage param) {
+        Pair<List<EntitySysUser>,Long> pair = serviceSysUser.cutPage(param);
+        BaseResult baseResult = new BaseResult();
+        baseResult.setData(new Runnable(){
+            public List<EntitySysUser> rows = pair.getKey();
+            public Long total = pair.getValue();
+            public void run(){
+            }
+        });
+        return baseResult;
+    }
+    // 此方法被再次应用的可能性几乎为零
+    public Pair<List<EntitySysUser>,Long> cutPage(BasePagination param) {
+        PageRequest pageRequest = param.getPageRequest();
+        //执行分页
+        Page page = jpaSysUser.findAll(pageRequest);
+        return new Pair<List<EntitySysUser>,Long>(page.getContent(),page.getTotalElements());
+    }

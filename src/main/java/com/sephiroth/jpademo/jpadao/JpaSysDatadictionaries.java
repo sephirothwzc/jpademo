@@ -1,5 +1,6 @@
 package com.sephiroth.jpademo.jpadao;
 
+import com.sephiroth.jpademo.base.BaseJpaRepository;
 import com.sephiroth.jpademo.entity.EntitySysDatadictionaries;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -16,10 +17,12 @@ import java.util.List;
  * @Date: Create in 10:57 2018/2/4
  * @Modified By:
  */
+//public interface JpaSysDatadictionaries extends
+//        JpaRepository<EntitySysDatadictionaries,String>,
+//        JpaSpecificationExecutor<EntitySysDatadictionaries>,
+//        Serializable {
 public interface JpaSysDatadictionaries extends
-    JpaRepository<EntitySysDatadictionaries,String>,
-    JpaSpecificationExecutor<EntitySysDatadictionaries>,
-    Serializable {
+        BaseJpaRepository<EntitySysDatadictionaries,String> {
 
     // 自定义查询 nativeQuery = true (sql) false (hql)
     // Query 只支持查询 配合 Modifying 执行增删改
