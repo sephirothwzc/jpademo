@@ -1,5 +1,6 @@
 package com.sephiroth.jpademo.commtools.Mail;
 
+import lombok.Data;
 import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.List;
  * @Date: Create in 22:29 2018/2/6
  * @Modified By:
  */
+@Data
 public class MailEntity implements Serializable {
     // smtp 服务器
     private String smtpService;
@@ -29,70 +31,5 @@ public class MailEntity implements Serializable {
     private String contentType;
     // 收件地址
     private List<String> list = new ArrayList<>();
-
-
-    public String getSmtpService() {
-        return smtpService;
-    }
-
-    public void setSmtpService(String smtpService) {
-        this.smtpService = smtpService;
-    }
-
-    public String getSmtpPort() {
-        return smtpPort;
-    }
-
-    public void setSmtpPort(String smtpPort) {
-        this.smtpPort = smtpPort;
-    }
-
-    public String getFromMailAddress() {
-        return fromMailAddress;
-    }
-
-    public void setFromMailAddress(String fromMailAddress) {
-        this.fromMailAddress = fromMailAddress;
-    }
-
-    public String getFromMailsmtpPWD() {
-        return fromMailsmtpPWD;
-    }
-
-    public void setFromMailsmtpPWD(String fromMailsmtpPWD) {
-        this.fromMailsmtpPWD = fromMailsmtpPWD;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public List<String> getList() {
-        return list;
-    }
-
-    public void setList(List<String> list) {
-        this.list = list;
-    }
 
 }

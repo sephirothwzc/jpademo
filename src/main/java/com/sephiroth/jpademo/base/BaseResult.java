@@ -1,6 +1,8 @@
 package com.sephiroth.jpademo.base;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author: 吴占超
@@ -9,6 +11,8 @@ import lombok.Data;
  * @Modified By:
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseResult {
     // 状态
     public ResultState state = ResultState.Success;

@@ -1,10 +1,9 @@
 package com.sephiroth.jpademo.model.SysUser;
 
 import com.sephiroth.jpademo.base.BasePagination;
-import com.sephiroth.jpademo.entity.EntitySysUser;
-import com.sephiroth.jpademo.entity.QEntitySysUser;
 import com.sephiroth.jpademo.retention.RetentionPagination;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @Author: 吴占超
@@ -16,6 +15,7 @@ import lombok.Data;
 public class InCutUsePage extends BasePagination {
 
 
+    @NotEmpty
     @RetentionPagination(field = "username")
     public String username;
 

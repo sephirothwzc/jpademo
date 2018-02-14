@@ -4,12 +4,13 @@ import com.sephiroth.jpademo.base.BaseResult;
 import com.sephiroth.jpademo.entity.EntitySysUser;
 import com.sephiroth.jpademo.model.SysUser.InCutUsePage;
 import com.sephiroth.jpademo.service.ServiceSysUser;
-import javafx.util.Pair;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -20,13 +21,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/user")
+@Validated
 public class SysUserController {
 
     @Autowired
     private ServiceSysUser serviceSysUser;
 
     @RequestMapping(value = "/manager")
-    public BaseResult cutUserPage(InCutUsePage param) {
+    public BaseResult cutUserPage(@Valid InCutUsePage param) {
         val pair = serviceSysUser.cutPage(param);
         BaseResult baseResult = new BaseResult();
         baseResult.setData(new Runnable(){
@@ -39,7 +41,7 @@ public class SysUserController {
     }
 
     @RequestMapping(value = "/usemanager")
-    public BaseResult cutPageCustomer(InCutUsePage param) {
+    public BaseResult cutPageCustomer(@Valid InCutUsePage param) {
         val pair = serviceSysUser.cutPageCustomer(param);
         BaseResult baseResult = new BaseResult();
         baseResult.setData(new Runnable(){
