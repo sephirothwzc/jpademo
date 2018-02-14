@@ -4,12 +4,11 @@ import com.sephiroth.jpademo.base.BasePagination;
 import com.sephiroth.jpademo.entity.EntitySysUser;
 import com.sephiroth.jpademo.jpadao.JpaSysUser;
 import javafx.util.Pair;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -34,6 +33,18 @@ public class ServiceSysUser {
         PageRequest pageRequest = param.getPageRequest();
         //执行分页
         Page page = jpaSysUser.findAll(pageRequest);
+        return new Pair<List<EntitySysUser>,Long>(page.getContent(),page.getTotalElements());
+    }
+
+    /**
+     *  @Author: 吴占超
+     *  @Description: 自定义查询
+     *  @Date:  10:34 2018/2/13
+     *  @param param
+     */
+    public Pair<List<EntitySysUser>,Long> cutPageCustomer(BasePagination param) {
+        PageRequest pageRequest = param.getPageRequest();
+        val page = jpaSysUser.findAll(param.<EntitySysUser>getSpec(),pageRequest);
         return new Pair<List<EntitySysUser>,Long>(page.getContent(),page.getTotalElements());
     }
 }

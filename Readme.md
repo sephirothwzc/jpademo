@@ -39,3 +39,53 @@
         Page page = jpaSysUser.findAll(pageRequest);
         return new Pair<List<EntitySysUser>,Long>(page.getContent(),page.getTotalElements());
     }
+
+## 2018-02-14 吴占超
+1. 引入jpa-scpe支持动态查询（参考地址：https://github.com/wenhao/jpa-spec）
+2. 多表复杂联查根据业务创建视图对象 也可采用 QueryDSL进行查询（建议）
+3. 依然保留了QueryDSL 便于进行聚合处理
+    service
+    
+    //实体管理对象
+    @Autowired
+    private EntityManager entityManager;
+    //queryDSL,JPA查询工厂
+    private JPAQueryFactory queryFactory;
+
+    //实例化查询工厂
+    @PostConstruct
+    public void init()
+    {
+        queryFactory = new JPAQueryFactory(entityManager);
+    }
+    
+        /**
+         * count聚合函数
+         * @return
+         */
+        public long countExample()
+        {
+            //用户查询实体
+            QUserBean _Q_user = QUserBean.userBean;
+            return queryFactory
+                    .select(_Q_user.id.count())//根据主键查询总条数
+                    .from(_Q_user)
+                    .fetchOne();//返回总条数
+        }
+    
+    /**
+     * group by & having聚合函数
+     * @return
+     */
+    public List<UserBean> groupByExample()
+    {
+        //用户查询实体
+        QUserBean _Q_user = QUserBean.userBean;
+        return queryFactory
+                .select(_Q_user)
+                .from(_Q_user)
+                .groupBy(_Q_user.socre)//根据积分分组
+                .having(_Q_user.age.gt(22))//并且年龄大于22岁
+                .fetch();//返回用户列表
+    }
+
