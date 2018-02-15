@@ -36,7 +36,7 @@ public class LoginController {
         EntitySysUser sysUser = jpa_sysUser.findOne(new Specification<EntitySysUser>() {
             @Override
             public Predicate toPredicate(Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                criteriaQuery.where(criteriaBuilder.equal(root.get("username"),user.getUsername()));
+                criteriaQuery.where(criteriaBuilder.equal(root.get("UserName"),user.getUserName()));
                 return null;
             }
         });

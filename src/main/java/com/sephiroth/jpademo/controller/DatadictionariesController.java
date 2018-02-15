@@ -50,15 +50,4 @@ public class DatadictionariesController {
         jpa_datadictionaries.delete(id);
         return jpa_datadictionaries.findAll();
     }
-
-    @RequestMapping(value = "/en")
-    public List<EntitySysDatadictionaries> eanble(String eanble) {
-        return jpa_datadictionaries.useGetEnableflag(eanble);
-    }
-
-    @RequestMapping(value = "/del")
-    public List<EntitySysDatadictionaries> deleteForCodeName(EntitySysDatadictionaries entity) {
-        jpa_datadictionaries.deleteQuery(entity.getCode(),entity.getName());
-        return jpa_datadictionaries.findAll();
-    }
 }

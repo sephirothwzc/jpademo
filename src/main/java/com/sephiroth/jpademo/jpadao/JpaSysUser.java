@@ -1,16 +1,17 @@
 package com.sephiroth.jpademo.jpadao;
 
 
-import com.sephiroth.jpademo.base.BaseJpaRepository;
-import com.sephiroth.jpademo.entity.EntitySysDatadictionaries;
 import com.sephiroth.jpademo.entity.EntitySysUser;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import com.sephiroth.jpademo.base.BaseJpaRepository;
 
-import java.io.Serializable;
+/**
+ * @Author: 吴占超
+ * @Description: JPA DAO
+ * @Date: Create in 
+ * @Modified By:
+ */
+public interface JpaSysUser  extends
+    BaseJpaRepository<EntitySysUser,String> {
 
-
-public interface JpaSysUser extends
-        BaseJpaRepository<EntitySysUser,String> {
 
 }
