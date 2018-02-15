@@ -3,6 +3,10 @@ package com.sephiroth.jpademo.controller;
 import com.sephiroth.jpademo.entity.EntitySysUser;
 import com.sephiroth.jpademo.iiteral.IiteralSession;
 import com.sephiroth.jpademo.jpadao.JpaSysUser;
+import com.sephiroth.jpademo.model.SysUser.Inlogin;
+import com.sephiroth.jpademo.service.ServiceSysUser;
+import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * @Author: 吴占超
@@ -27,19 +32,13 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Autowired
-    private JpaSysUser jpa_sysUser;
+    private ServiceSysUser serviceSysUser;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public String login(EntitySysUser user, HttpServletRequest request) {
+    public String login(@Valid Inlogin user, HttpServletRequest request) {
         // 根据用户名查询用户是否存在
-        EntitySysUser sysUser = jpa_sysUser.findOne(new Specification<EntitySysUser>() {
-            @Override
-            public Predicate toPredicate(Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                criteriaQuery.where(criteriaBuilder.equal(root.get("UserName"),user.getUserName()));
-                return null;
-            }
-        });
+        EntitySysUser sysUser = serviceSysUser.findByUserNameAndPassWord(user);
         if(null == sysUser) {
             return "用户名不存在！";
         }

@@ -15,6 +15,7 @@ public class EntitySysDatadictionaries  implements Serializable {
   /**
    * 主键
    */
+@Id
   @GenericGenerator(name = "user-uuid", strategy = "uuid")
   @GeneratedValue(generator = "user-uuid")
   @Column(name = "id", nullable = false, length = 64)

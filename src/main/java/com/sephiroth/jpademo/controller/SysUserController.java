@@ -39,17 +39,4 @@ public class SysUserController {
         });
         return baseResult;
     }
-
-    @RequestMapping(value = "/usemanager")
-    public BaseResult cutPageCustomer(@Valid InCutUsePage param) {
-        val pair = serviceSysUser.cutPageCustomer(param);
-        BaseResult baseResult = new BaseResult();
-        baseResult.setData(new Runnable(){
-            public List<EntitySysUser> rows = pair.getKey();
-            public Long total = pair.getValue();
-            public void run(){
-            }
-        });
-        return baseResult;
-    }
 }

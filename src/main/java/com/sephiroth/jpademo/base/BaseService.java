@@ -32,10 +32,14 @@ public abstract class BaseService<T> {
      *  @param pagination
      *  @return
      */
-    public Pair<List<T>,Long> cutPageCustomer(BasePagination pagination) {
+    public Pair<List<T>,Long> cutPage(BasePagination pagination) {
         PageRequest pageRequest = pagination.getPageRequest();
         val page = getBaseJpaRepository().findAll(pagination.<T>getSpec(),pageRequest);
         return new Pair<List<T>,Long>(page.getContent(),page.getTotalElements());
+    }
+
+    public List<T> findAll() {
+        return getBaseJpaRepository().findAll();
     }
 
     /**
@@ -58,5 +62,9 @@ public abstract class BaseService<T> {
      */
     public void delete(T item) {
         getBaseJpaRepository().delete(item);
+    }
+
+    public void delete(String id) {
+        getBaseJpaRepository().delete(id);
     }
 }
