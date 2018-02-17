@@ -35,13 +35,14 @@ public class ServiceSysUser extends BaseService<EntitySysUser>{
      *  @Author: 吴占超
      *  @Description: 根据用户名获取用户
      *  @Date:  14:55 2018/2/15
-     *  @param param
+     *  @param username
+     *  @return
      */
-    public EntitySysUser findByUserNameAndPassWord(Inlogin param) {
+    public EntitySysUser findByUserName(String username) {
         return jpaSysUser.findOne(new Specification<EntitySysUser>() {
             @Override
             public Predicate toPredicate(Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                return criteriaQuery.where(criteriaBuilder.equal(root.get(EntitySysUser._userName),param.getUsername()))
+                return criteriaQuery.where(criteriaBuilder.equal(root.get(EntitySysUser._userName),username))
                         .getRestriction();
             }
         });

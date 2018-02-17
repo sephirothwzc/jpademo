@@ -1,5 +1,6 @@
 package com.sephiroth.jpademo.model.SysUser;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,6 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @Modified By:
  */
 @Data
+@AllArgsConstructor
 public class Inlogin {
     @NotEmpty
     public String username;

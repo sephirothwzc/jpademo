@@ -28,7 +28,7 @@ import javax.validation.Valid;
  * @Modified By:
  */
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/login")
 public class LoginController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class LoginController {
     @ResponseBody
     public String login(@Valid Inlogin user, HttpServletRequest request) {
         // 根据用户名查询用户是否存在
-        EntitySysUser sysUser = serviceSysUser.findByUserNameAndPassWord(user);
+        EntitySysUser sysUser = serviceSysUser.findByUserName(user.getUsername());
         if(null == sysUser) {
             return "用户名不存在！";
         }
@@ -47,5 +47,16 @@ public class LoginController {
         }
         request.getSession().setAttribute(IiteralSession.user,sysUser);
         return "登录成功";
+    }
+
+    /**
+     *  @Author: 吴占超
+     *  @Description:
+     *  @Date:  21:33 2018/2/5
+     *  @return 登陆页
+     */
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 }

@@ -18,12 +18,12 @@ public class SessionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object o) throws Exception {
         // 登录不做拦截
         System.out.println(request.getRequestURI());
-        if("/home/login".equals(request.getRequestURI())|| "/user/login".equals(request.getRequestURI())) {
+        if("/login/login".equals(request.getRequestURI())|| "/login/".equals(request.getRequestURI())) {
             return true;
         }
         Object obj = request.getSession().getAttribute(IiteralSession.user);
         if(null == obj) {
-            response.sendRedirect("/home/login");
+            response.sendRedirect("/login/");
             return false;
         }
         return true;
