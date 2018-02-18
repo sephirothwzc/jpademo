@@ -94,5 +94,13 @@ public class EntitySysUser  implements Serializable {
   private String remark;
 
   public static final String  _remark = "remark";
+  
+  /**
+   * 盐
+   */
+  @Column(name = "salt")
+  private String salt;
+
+  public static final String  _salt = "salt";
 
 }

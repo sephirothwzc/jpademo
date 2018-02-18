@@ -2,6 +2,7 @@ package com.sephiroth.jpademo.model.SysUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -11,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @Modified By:
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Inlogin {
     @NotEmpty
