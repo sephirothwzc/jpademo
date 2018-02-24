@@ -2,7 +2,7 @@ package com.sephiroth.jpademo.service;
 
 
 import com.sephiroth.jpademo.entity.EntitySysRoleJurisdiction;
-import com.sephiroth.jpademo.base.BaseJpaRepository;
+import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
 import com.sephiroth.jpademo.base.BaseService;
 import com.sephiroth.jpademo.jpadao.JpaSysRoleJurisdiction;
 import org.springframework.beans.factory.annotation.Autowired;

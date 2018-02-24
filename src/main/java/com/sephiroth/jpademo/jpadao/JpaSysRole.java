@@ -2,7 +2,7 @@ package com.sephiroth.jpademo.jpadao;
 
 
 import com.sephiroth.jpademo.entity.EntitySysRole;
-import com.sephiroth.jpademo.base.BaseJpaRepository;
+import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

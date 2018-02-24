@@ -1,6 +1,7 @@
 package com.sephiroth.jpademo.base;
 
-import com.sephiroth.jpademo.entity.EntitySysUser;
+import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
+import com.sephiroth.jpademo.base.jpa.BasePagination;
 import javafx.util.Pair;
 import lombok.val;
 import org.springframework.data.domain.PageRequest;

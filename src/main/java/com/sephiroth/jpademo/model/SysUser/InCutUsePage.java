@@ -1,6 +1,6 @@
 package com.sephiroth.jpademo.model.SysUser;
 
-import com.sephiroth.jpademo.base.BasePagination;
+import com.sephiroth.jpademo.base.jpa.BasePagination;
 import com.sephiroth.jpademo.retention.RetentionPagination;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;

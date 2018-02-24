@@ -2,7 +2,7 @@ package com.sephiroth.jpademo.jpadao;
 
 
 import com.sephiroth.jpademo.entity.EntityTResult;
-import com.sephiroth.jpademo.base.BaseJpaRepository;
+import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
 
 /**
  * @Author: 吴占超

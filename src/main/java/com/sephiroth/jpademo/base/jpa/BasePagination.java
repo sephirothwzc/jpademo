@@ -1,4 +1,4 @@
-package com.sephiroth.jpademo.base;
+package com.sephiroth.jpademo.base.jpa;
 
 import com.github.wenhao.jpa.Specifications;
 import com.sephiroth.jpademo.commtools.helper.StringHelper;

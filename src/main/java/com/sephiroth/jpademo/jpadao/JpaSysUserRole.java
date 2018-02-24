@@ -1,11 +1,8 @@
 package com.sephiroth.jpademo.jpadao;
 
 
-import com.sephiroth.jpademo.entity.EntitySysRole;
 import com.sephiroth.jpademo.entity.EntitySysUserRole;
-import com.sephiroth.jpademo.base.BaseJpaRepository;
-
-import java.util.List;
+import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
 
 /**
  * @Author: 吴占超
