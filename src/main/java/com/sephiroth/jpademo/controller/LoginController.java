@@ -38,10 +38,9 @@ public class LoginController {
         //当前Subject
         Subject currentUser = SecurityUtils.getSubject();
         //加密（md5+盐），返回一个32位的字符串小写
-        String salt="("+user.getUsername()+")";
-        String md5Pwd=new Md5Hash(user.getPassword(),salt).toString();
+        // String md5Pwd=new Md5Hash(user.getPassword(),user.getUsername()).toString();
         //传递token给shiro的realm
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),md5Pwd);
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
         try {
             currentUser.login(token);
             return "index";

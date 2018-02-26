@@ -7,7 +7,7 @@
     5. 常量名，大写开头，下划线分割，如MAX_LENGTH。
     6. final变量，用大写字母+下划线命名
 2. 项目结构规范
-    1. cntroller->service->jpadao
+    1. controller->service->jpadao
     2. model服务于service
     3. entity映射数据库对象
     4. interceptor拦截器

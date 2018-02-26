@@ -49,7 +49,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         String username = (String)token.getPrincipal(); //得到用户名
         String password = new String((char[])token.getCredentials()); //得到密码
         EntitySysUser userInfo = serviceSysUser.findByUserName(username);
-        String md5Pwd=new Md5Hash(userInfo.getPassword(),userInfo.getSalt()).toString();
+        String md5Pwd=new Md5Hash(password,username).toString();
         if(userInfo == null || !username.equals(userInfo.getUserName())) {
             throw new UnknownAccountException(); //如果用户名错误
         }
