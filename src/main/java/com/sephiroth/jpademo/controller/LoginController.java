@@ -1,20 +1,17 @@
 package com.sephiroth.jpademo.controller;
 
-import com.sephiroth.jpademo.entity.EntitySysUser;
-import com.sephiroth.jpademo.iiteral.IiteralSession;
 import com.sephiroth.jpademo.model.SysUser.Inlogin;
+import com.sephiroth.jpademo.service.ServiceSysRole;
 import com.sephiroth.jpademo.service.ServiceSysUser;
-import lombok.Data;
+import lombok.val;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -32,9 +29,15 @@ public class LoginController {
     @Autowired
     private ServiceSysUser serviceSysUser;
 
+    @Autowired
+    private ServiceSysRole serviceSysRole;
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     // @ResponseBody
     public String login(@Valid Inlogin user, HttpServletRequest request) {
+
+        val t = serviceSysRole.findByUser(user.getUsername());
+
         //当前Subject
         Subject currentUser = SecurityUtils.getSubject();
         //加密（md5+盐），返回一个32位的字符串小写

@@ -12,7 +12,9 @@ import org.aopalliance.intercept.MethodInvocation;
 public abstract class SubSecrecyFilter {
     public static Object dofilter(MethodInvocation Invocation) throws Throwable {
         val args = Invocation.getArguments();
-        // System.console().printf("参数：",args);
+        val q = Invocation.getThis();
+        val x = Invocation.getMethod();
+
         System.out.println(args);
         Object obj=Invocation.proceed();
         return obj;
