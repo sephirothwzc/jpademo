@@ -38,6 +38,7 @@ public class LoginController {
 
         val t = serviceSysRole.findByUser(user.getUsername());
 
+        val ts = serviceSysUser.findByUserName(user.getUsername());
         //当前Subject
         Subject currentUser = SecurityUtils.getSubject();
         //加密（md5+盐），返回一个32位的字符串小写

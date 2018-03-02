@@ -38,12 +38,15 @@ public class ServiceSysUser extends BaseService<EntitySysUser>{
      *  @return
      */
     public EntitySysUser findByUserName(String username) {
-        return jpaSysUser.findOne(new Specification<EntitySysUser>() {
-            @Override
-            public Predicate toPredicate(Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                return criteriaQuery.where(criteriaBuilder.equal(root.get(EntitySysUser._userName),username))
-                        .getRestriction();
-            }
-        });
+        return jpaSysUser.findOne((Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder)->
+            criteriaQuery.where(criteriaBuilder.equal(root.get(EntitySysUser._userName),username))
+                    .getRestriction());
+//        return jpaSysUser.findOne(new Specification<EntitySysUser>() {
+//            @Override
+//            public Predicate toPredicate(Root<EntitySysUser> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+//                return criteriaQuery.where(criteriaBuilder.equal(root.get(EntitySysUser._userName),username))
+//                        .getRestriction();
+//            }
+//        });
     }
 }
