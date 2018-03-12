@@ -3,6 +3,7 @@ package com.sephiroth.jpademo.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,84 +20,85 @@ public class EntitySysUser  implements Serializable {
   @GenericGenerator(name = "user-uuid", strategy = "uuid")
   @GeneratedValue(generator = "user-uuid")
   @Column(name = "id", nullable = false, length = 64)
-  private String id;
+  public String id;
 
   
   /**
    * null
    */
   @Column(name = "createdate")
-  private java.sql.Timestamp createdate;
+  public java.sql.Timestamp createdate;
 
   
   /**
    * null
    */
   @Column(name = "updatedate")
-  private java.sql.Timestamp updatedate;
+  public java.sql.Timestamp updatedate;
 
   
   /**
    * null
    */
   @Column(name = "createby")
-  private String createby;
+  public String createby;
 
   
   /**
    * null
    */
   @Column(name = "updateby")
-  private String updateby;
+  public String updateby;
 
   
   /**
    * null
    */
   @Column(name = "enableflag")
-  private String enableflag;
+  public String enableflag;
 
   
   /**
    * 用户名
    */
   @Column(name = "user_name")
-  private String userName;
+  @NotEmpty
+  public String userName;
 
   
   /**
    * 用户编码
    */
   @Column(name = "user_code")
-  private String userCode;
+  public String userCode;
 
   
   /**
    * 密码
    */
   @Column(name = "password")
-  private String password;
+  public String password;
 
   
   /**
    * 备注
    */
   @Column(name = "remark")
-  private String remark;
+  public String remark;
 
   
   /**
    * 盐
    */
   @Column(name = "salt")
-  private String salt;
+  public String salt;
 
   
   /**
    * 最后登陆时间
    */
   @Column(name = "last_login")
-  private java.sql.Timestamp lastLogin;
+  public java.sql.Timestamp lastLogin;
 
   public static final String  _id = "id";
 

@@ -9,6 +9,8 @@ import com.sephiroth.jpademo.service.ServiceSysUser;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +32,7 @@ public class SysUserController {
     private ServiceSysUser serviceSysUser;
 
     @RequestMapping(value = "/manager")
-    public BaseResult cutUserPage(@Valid InManagerSysUser param) {
+    public BaseResult cutUserPage(@RequestBody @Valid InManagerSysUser param) {
         val pair = serviceSysUser.cutPage(param);
         BaseResult baseResult = new BaseResult();
         baseResult.setData(new Runnable(){
@@ -42,19 +44,19 @@ public class SysUserController {
         return baseResult;
     }
 
-    @RequestMapping(value = "/item")
-    public BaseResult item(String id) {
+    @RequestMapping(value = "/item/{id}")
+    public BaseResult item(@PathVariable String id) {
         return new BaseResult(serviceSysUser.findOne(id));
     }
 
     @RequestMapping(value = "/del")
-    public BaseResult del(List<String> param) {
+    public BaseResult del(@RequestBody List<String> param) {
         serviceSysUser.delete(param);
         return new BaseResult(param.size());
     }
 
-    @RequestMapping(value = "save")
-    public BaseResult save(@Valid EntitySysUser param) {
+    @RequestMapping(value = "/save")
+    public BaseResult save(@RequestBody @Valid EntitySysUser param) {
         return new BaseResult(serviceSysUser.save(param));
     }
 }

@@ -10,49 +10,49 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class InManagerSysUser  extends BasePagination {
 
   @RetentionPagination
-  private String id;
+  public String id;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
-  private java.sql.Timestamp createdate;
+  public java.sql.Timestamp createdate;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq)
-  private java.sql.Timestamp createdate1;
+  public java.sql.Timestamp createdate1;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
-  private java.sql.Timestamp updatedate;
+  public java.sql.Timestamp updatedate;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq)
-  private java.sql.Timestamp updatedate1;
+  public java.sql.Timestamp updatedate1;
 
   @RetentionPagination
-  private String createby;
+  public String createby;
 
   @RetentionPagination
-  private String updateby;
+  public String updateby;
 
   @RetentionPagination
-  private String enableflag;
+  public String enableflag;
 
   @RetentionPagination
-  private String userName;
+  public String userName;
 
   @RetentionPagination
-  private String userCode;
+  public String userCode;
 
   @RetentionPagination
-  private String password;
+  public String password;
 
   @RetentionPagination
-  private String remark;
+  public String remark;
 
   @RetentionPagination
-  private String salt;
+  public String salt;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
-  private java.sql.Timestamp lastLogin;
+  public java.sql.Timestamp lastLogin;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq)
-  private java.sql.Timestamp lastLogin1;
+  public java.sql.Timestamp lastLogin1;
 
 
 }

@@ -2,9 +2,13 @@ package com.sephiroth.jpademo.base;
 
 import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
 import com.sephiroth.jpademo.base.jpa.BasePagination;
+import com.sephiroth.jpademo.entity.EntitySysUser;
 import javafx.util.Pair;
 import lombok.val;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import java.util.List;
 
@@ -77,7 +81,18 @@ public abstract class BaseService<T> {
         getBaseJpaRepository().delete(id);
     }
 
-    public void delete(List<String> id) {
-        getBaseJpaRepository().deleteInBatch(id);
+    public void delete(List<String> listid) {
+        val entitys = listid.stream().map(p-> {
+            EntitySysUser temp = new EntitySysUser();
+            temp.setId(p);
+            return temp;
+        }).collect(Collectors.toList());
+//        val e = listid.stream().collect(ArrayList::new,
+//                (acc,p)->{
+//                    val t = new EntitySysUser();
+//                    t.setId(p);
+//                    acc.add(t);
+//                },ArrayList::addAll);
+        getBaseJpaRepository().deleteInBatch(entitys);
     }
 }
