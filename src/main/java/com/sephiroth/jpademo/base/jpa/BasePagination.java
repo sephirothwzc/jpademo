@@ -81,21 +81,25 @@ public class BasePagination {
         val fields = Arrays.asList(pros);
         val sp = Specifications.<T>and();
         fields.stream()
+                .filter(p-> {
+                    try{
+                        return (p.get(this)!=null
+                                && !StringUtils.isEmpty(p.get(this))
+                                && p.getAnnotation(RetentionPagination.class) != null);
+                    }catch (Exception e){ return false; }
+                })
                 .map(p -> {
                     FieldSuper fs = new FieldSuper();
                     try {
                         fs.setRptemp(p.getAnnotation(RetentionPagination.class));
                         fs.setOvalue(p.get(this));
                         fs.setClassSimpleName(p.getType().getSimpleName());
-                        if (fs.getRptemp() != null) {
-                            fs.setFieldname(StringUtils.isEmpty(fs.getRptemp().field()) ? p.getName() : fs.getRptemp().field());
-                        }
+                        fs.setFieldname(StringUtils.isEmpty(fs.getRptemp().field()) ? p.getName() : fs.getRptemp().field());
                     } catch (Exception e) {
                     } finally {
                         return fs;
                     }
                 })
-                .filter(p -> p.getRptemp() != null && p.getOvalue() != null && !StringUtils.isEmpty(p.getOvalue()))
                 .forEach(p -> {
                     switch (p.getRptemp().scpeEnum()) {
                         case like:
