@@ -15,13 +15,12 @@ public class EntitySysUser  implements Serializable {
   /**
    * null
    */
-@Id
+  @Id
   @GenericGenerator(name = "user-uuid", strategy = "uuid")
   @GeneratedValue(generator = "user-uuid")
   @Column(name = "id", nullable = false, length = 64)
   private String id;
 
-  public static final String  _id = "id";
   
   /**
    * null
@@ -29,7 +28,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "createdate")
   private java.sql.Timestamp createdate;
 
-  public static final String  _createdate = "createdate";
   
   /**
    * null
@@ -37,7 +35,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "updatedate")
   private java.sql.Timestamp updatedate;
 
-  public static final String  _updatedate = "updatedate";
   
   /**
    * null
@@ -45,7 +42,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "createby")
   private String createby;
 
-  public static final String  _createby = "createby";
   
   /**
    * null
@@ -53,7 +49,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "updateby")
   private String updateby;
 
-  public static final String  _updateby = "updateby";
   
   /**
    * null
@@ -61,7 +56,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "enableflag")
   private String enableflag;
 
-  public static final String  _enableflag = "enableflag";
   
   /**
    * 用户名
@@ -69,7 +63,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "user_name")
   private String userName;
 
-  public static final String  _userName = "userName";
   
   /**
    * 用户编码
@@ -77,7 +70,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "user_code")
   private String userCode;
 
-  public static final String  _userCode = "userCode";
   
   /**
    * 密码
@@ -85,7 +77,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "password")
   private String password;
 
-  public static final String  _password = "password";
   
   /**
    * 备注
@@ -93,7 +84,6 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "remark")
   private String remark;
 
-  public static final String  _remark = "remark";
   
   /**
    * 盐
@@ -101,6 +91,36 @@ public class EntitySysUser  implements Serializable {
   @Column(name = "salt")
   private String salt;
 
+  
+  /**
+   * 最后登陆时间
+   */
+  @Column(name = "last_login")
+  private java.sql.Timestamp lastLogin;
+
+  public static final String  _id = "id";
+
+  public static final String  _createdate = "createdate";
+
+  public static final String  _updatedate = "updatedate";
+
+  public static final String  _createby = "createby";
+
+  public static final String  _updateby = "updateby";
+
+  public static final String  _enableflag = "enableflag";
+
+  public static final String  _userName = "userName";
+
+  public static final String  _userCode = "userCode";
+
+  public static final String  _password = "password";
+
+  public static final String  _remark = "remark";
+
   public static final String  _salt = "salt";
+
+  public static final String  _lastLogin = "lastLogin";
+
 
 }

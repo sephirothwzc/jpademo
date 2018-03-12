@@ -14,6 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseResult {
+
+    /**
+     *  @Author: 吴占超
+     *  @Description: 默认成功 构造函数
+     *  @Date:  10:38 2018/3/8
+     *  @param d
+     */
+    public BaseResult(Object d) {
+        this.setData(d);
+    }
+
     // 状态
     public ResultState state = ResultState.Success;
     // 数据对象

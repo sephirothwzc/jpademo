@@ -45,6 +45,14 @@ public abstract class BaseService<T> {
 
     /**
      *  @Author: 吴占超
+     *  @Description: 根据主键获取
+     *  @Date:  10:51 2018/3/8
+     *  @param id
+     */
+    public T findOne(String id) { return (T)getBaseJpaRepository().findOne(id); }
+
+    /**
+     *  @Author: 吴占超
      *  @Description: 保存 根据主键判断是否新增
      *  @Date:  14:33 2018/2/15
      *  @param item
@@ -67,5 +75,9 @@ public abstract class BaseService<T> {
 
     public void delete(String id) {
         getBaseJpaRepository().delete(id);
+    }
+
+    public void delete(List<String> id) {
+        getBaseJpaRepository().deleteInBatch(id);
     }
 }

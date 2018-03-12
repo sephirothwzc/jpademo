@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @Author: 吴占超
- * @Description: 注册拦截器
+ * @Description: 注册拦截器 拦截器session 默认未启动
  * @Date: Create in 23:06 2018/2/5
  * @Modified By:
  */

@@ -6,11 +6,11 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 /**
  * @Author: 吴占超
- * @Description: 通过注解配置factory-class
+ * @Description: 通过注解配置factory-class 注释注解则不启用
  * @Date: Create in 16:10 2018/2/26
  * @Modified By:
  */
-@Configuration
+// @Configuration
 @EnableJpaRepositories(basePackages = "com.sephiroth.jpademo.jpadao",
         repositoryFactoryBeanClass = SubRepositoryFactoryBean.class)
 @EnableSpringDataWebSupport

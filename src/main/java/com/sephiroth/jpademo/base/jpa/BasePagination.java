@@ -105,6 +105,14 @@ public class BasePagination {
                         case lt:
                             sp.lt(Objects.nonNull(ovalue),fieldname,ovalue.toString());
                             break;
+                        case gteq:
+                            sp.gt(Objects.nonNull(ovalue),fieldname,ovalue.toString());
+                            sp.eq(fieldname,ovalue);
+                            break;
+                        case lteq:
+                            sp.lt(Objects.nonNull(ovalue),fieldname,ovalue.toString());
+                            sp.eq(fieldname,ovalue);
+                            break;
                         case in:
                             if(p.getType() == String.class)
                                 sp.in(Objects.nonNull(ovalue),fieldname,ovalue.toString().split(","));
@@ -117,8 +125,6 @@ public class BasePagination {
                             else
                                 sp.notIn(Objects.nonNull(ovalue),fieldname,ovalue);
                             break;
-                        case between:
-
                     }
                 }
             }catch (Exception e) {

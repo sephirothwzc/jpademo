@@ -14,11 +14,11 @@ import java.util.Properties;
 
 /**
  * @Author: 吴占超
- * @Description:
+ * @Description: 目前登陆为未启用状态
  * @Date: Create in 15:54 2018/2/16
  * @Modified By:
  */
-@Configuration
+// @Configuration
 public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {

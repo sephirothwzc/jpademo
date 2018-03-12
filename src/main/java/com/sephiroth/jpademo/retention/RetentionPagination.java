@@ -12,6 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD}) // 定义注解的作用目标**作用范围字段、枚举的常量/方法
 @Documented // 说明该注解将被包含在javadoc中
 public @interface RetentionPagination {
+
     /**
      * 查询属性名 默认 ""
      * @return
@@ -31,7 +32,7 @@ public @interface RetentionPagination {
     ScpeEnum scpeEnum() default ScpeEnum.like;
 
     public enum ScpeEnum {
-        eq,in,notIn,between,like,notLike,gt,lt
+        eq,in,notIn,between,like,notLike,gt,lt,gteq,lteq
     }
 
 }

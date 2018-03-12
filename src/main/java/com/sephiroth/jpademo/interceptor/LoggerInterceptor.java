@@ -57,6 +57,14 @@ public class LoggerInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) throws Exception {
         // 获取对象
         EntityTLogger logger = (EntityTLogger)request.getAttribute(IiteralLogger.LOGGER_ENTITY);
+
+        // Cannot create a session after the response has been committed
+//        // 设置登陆对象
+//        Object obj = request.getSession().getAttribute(IiteralSession.user);
+//        if(null != obj) {
+//            logger.setTokenUser(((EntitySysUser)obj).getId());
+//        }
+
         // 请求错误码
         logger.setHttpStatusCode(String.valueOf(response.getStatus()));
         // 请求开始时间
@@ -70,11 +78,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
         logger.setAliReturnData(JSON.toJSONString(request.getAttribute(IiteralLogger.LOGGER_RETURN),
                 SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteMapNullValue));
-        // 设置登陆对象
-        Object obj = request.getSession().getAttribute(IiteralSession.user);
-        if(null != obj) {
-            logger.setTokenUser(((EntitySysUser)obj).getId());
-        }
+
         // 写入数据库
         JpaTLogger jpaTLogger = new WebAppContextHelper().getJPADAO(JpaTLogger.class,request);
         jpaTLogger.save(logger);
