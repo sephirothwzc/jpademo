@@ -15,7 +15,8 @@ public class InManagerSysUser  extends BasePagination {
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
   public java.sql.Timestamp createdate;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq)
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq,
+  field = "createdate")
   public java.sql.Timestamp createdate1;
 
   @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
