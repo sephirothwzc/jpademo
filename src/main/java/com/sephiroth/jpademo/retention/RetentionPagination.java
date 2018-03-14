@@ -32,7 +32,7 @@ public @interface RetentionPagination {
     ScpeEnum scpeEnum() default ScpeEnum.like;
 
     public enum ScpeEnum {
-        eq,in,notIn,between,like,notLike,gt,lt,gteq,lteq
+        eq,in,notIn,between,like,notLike,gt,lt,ge,le
     }
 
 }

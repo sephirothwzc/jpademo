@@ -11,10 +11,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import java.rmi.server.ExportException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.sql.Timestamp;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -82,12 +80,14 @@ public class BasePagination {
         val fields = Arrays.asList(pros);
         val sp = Specifications.<T>and();
         fields.stream()
-                .filter(p-> {
-                    try{
-                        return (p.get(this)!=null
+                .filter(p -> {
+                    try {
+                        return (p.get(this) != null
                                 && !StringUtils.isEmpty(p.get(this))
                                 && p.getAnnotation(RetentionPagination.class) != null);
-                    }catch (Exception e){ return false; }
+                    } catch (Exception e) {
+                        return false;
+                    }
                 })
                 .map(p -> {
                     FieldSuper fs = new FieldSuper();
@@ -113,27 +113,39 @@ public class BasePagination {
                             sp.eq(p.getFieldname(), p.getOvalue());
                             break;
                         case gt:
-                            sp.gt(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
+                            if (p.getClassSimpleName() == Timestamp.class.getSimpleName()) {
+                                sp.gt(Objects.nonNull(p.getOvalue()), p.getFieldname(), (Date) p.getOvalue());
+                            } else {
+                                sp.gt(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
+                            }
                             break;
                         case lt:
-                            sp.lt(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
+                            if (p.getClassSimpleName() == Timestamp.class.getSimpleName()) {
+                                sp.lt(Objects.nonNull(p.getOvalue()), p.getFieldname(), (Date) p.getOvalue());
+                            } else {
+                                sp.lt(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
+                            }
                             break;
-//                        case gteq:
-//                            sp.gt(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
-//                            sp.eq(p.getFieldname(), p.getOvalue());
-//                            break;
-//                        case lteq:
-//                            sp.lt(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
-//                            sp.eq(p.getFieldname(), p.getOvalue());
-//                            break;
+                        case ge:
+                            if (p.getClassSimpleName().equals(Timestamp.class.getSimpleName()))
+                                sp.ge(Objects.nonNull(p.getOvalue()), p.getFieldname(), (Date) p.getOvalue());
+                            else
+                                sp.ge(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
+                            break;
+                        case le:
+                            if (p.getClassSimpleName().equals(Timestamp.class.getSimpleName()))
+                                sp.le(Objects.nonNull(p.getOvalue()), p.getFieldname(), (Date) p.getOvalue());
+                            else
+                                sp.le(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue().toString());
+                            break;
                         case in:
-                            if (p.getClassSimpleName() == String.class.getSimpleName())
+                            if (p.getClassSimpleName().equals(String.class.getSimpleName()))
                                 sp.in(Objects.nonNull(p.getOvalue()), p.getFieldname(), (Object[]) p.getOvalue().toString().split(","));
                             else
                                 sp.in(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue());
                             break;
                         case notIn:
-                            if (p.getClassSimpleName() == String.class.getSimpleName())
+                            if (p.getClassSimpleName().equals(String.class.getSimpleName()))
                                 sp.notIn(Objects.nonNull(p.getOvalue()), p.getFieldname(), (Object[]) p.getOvalue().toString().split(","));
                             else
                                 sp.notIn(Objects.nonNull(p.getOvalue()), p.getFieldname(), p.getOvalue());

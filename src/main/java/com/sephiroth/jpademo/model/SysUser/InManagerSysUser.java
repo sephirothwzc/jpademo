@@ -12,17 +12,17 @@ public class InManagerSysUser  extends BasePagination {
   @RetentionPagination
   public String id;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.ge)
   public java.sql.Timestamp createdate;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq,
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.le,
   field = "createdate")
   public java.sql.Timestamp createdate1;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.ge)
   public java.sql.Timestamp updatedate;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq)
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.le)
   public java.sql.Timestamp updatedate1;
 
   @RetentionPagination
@@ -49,10 +49,10 @@ public class InManagerSysUser  extends BasePagination {
   @RetentionPagination
   public String salt;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.gteq)
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.ge)
   public java.sql.Timestamp lastLogin;
 
-  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.lteq)
+  @RetentionPagination(scpeEnum = RetentionPagination.ScpeEnum.le)
   public java.sql.Timestamp lastLogin1;
 
 
