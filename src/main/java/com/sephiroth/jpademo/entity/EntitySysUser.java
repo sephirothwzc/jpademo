@@ -1,6 +1,7 @@
 package com.sephiroth.jpademo.entity;
 
 
+import com.sephiroth.jpademo.base.jpa.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "sys_user")
 @Data
-public class EntitySysUser  implements Serializable {
+public class EntitySysUser extends BaseEntity implements Serializable {
 
   
   /**

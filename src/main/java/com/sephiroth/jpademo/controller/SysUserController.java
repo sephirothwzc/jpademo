@@ -2,9 +2,7 @@ package com.sephiroth.jpademo.controller;
 
 import com.sephiroth.jpademo.base.BaseResult;
 import com.sephiroth.jpademo.entity.EntitySysUser;
-import com.sephiroth.jpademo.model.SysUser.InCutUsePage;
 import com.sephiroth.jpademo.model.SysUser.InManagerSysUser;
-import com.sephiroth.jpademo.retention.RetentionPagination;
 import com.sephiroth.jpademo.service.ServiceSysUser;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +32,12 @@ public class SysUserController {
     @RequestMapping(value = "/manager")
     public BaseResult cutUserPage(@RequestBody @Valid InManagerSysUser param) {
         val pair = serviceSysUser.cutPage(param);
-        BaseResult baseResult = new BaseResult();
-        baseResult.setData(new Runnable(){
+        return new BaseResult(new Runnable(){
             public List<EntitySysUser> rows = pair.getKey();
             public Long total = pair.getValue();
             public void run(){
             }
         });
-        return baseResult;
     }
 
     @RequestMapping(value = "/item/{id}")

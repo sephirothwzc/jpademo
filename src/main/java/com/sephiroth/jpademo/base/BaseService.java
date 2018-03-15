@@ -1,16 +1,18 @@
 package com.sephiroth.jpademo.base;
 
+import com.sephiroth.jpademo.base.jpa.BaseEntity;
 import com.sephiroth.jpademo.base.jpa.BaseJpaRepository;
 import com.sephiroth.jpademo.base.jpa.BasePagination;
-import com.sephiroth.jpademo.entity.EntitySysUser;
 import javafx.util.Pair;
 import lombok.val;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.sql.Timestamp;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: 吴占超
@@ -18,7 +20,7 @@ import java.util.List;
  * @Date: Create in 13:56 2018/2/15
  * @Modified By:
  */
-public abstract class BaseService<T> {
+public abstract class BaseService<T extends BaseEntity> {
     // entity   T
     // jpa      虚方法
 
@@ -63,6 +65,11 @@ public abstract class BaseService<T> {
      *  @return
      */
     public T save(T item) {
+        if(item.getId()!=null) {
+            item.setCreatedate(new Timestamp(System.currentTimeMillis()));
+            item.setEnableflag("1");
+        }
+        item.setUpdatedate(new Timestamp(System.currentTimeMillis()));
         return (T)getBaseJpaRepository().save(item);
     }
 
@@ -82,17 +89,26 @@ public abstract class BaseService<T> {
     }
 
     public void delete(List<String> listid) {
-        val entitys = listid.stream().map(p-> {
-            EntitySysUser temp = new EntitySysUser();
-            temp.setId(p);
-            return temp;
-        }).collect(Collectors.toList());
-//        val e = listid.stream().collect(ArrayList::new,
-//                (acc,p)->{
-//                    val t = new EntitySysUser();
-//                    t.setId(p);
-//                    acc.add(t);
-//                },ArrayList::addAll);
+        val entitys = listid.stream().map(p-> this.defaultT(p)).collect(Collectors.toList());
         getBaseJpaRepository().deleteInBatch(entitys);
+    }
+
+    /**
+     *  @Author: 吴占超
+     *  @Description: 创建当前泛型对象实例
+     *  @Date:  15:40 2018/3/15
+     *
+     */
+    private T defaultT(String id) {
+        try{
+            ParameterizedType st = (ParameterizedType)this.getClass().getGenericSuperclass();
+            Type tArgs = st.getActualTypeArguments()[0];
+            Class myclass = Class.forName(tArgs.getTypeName());
+            val temp = (T)myclass.newInstance();
+            temp.setId(id);
+            return temp;
+        } catch (Exception e){
+            return null;
+        }
     }
 }

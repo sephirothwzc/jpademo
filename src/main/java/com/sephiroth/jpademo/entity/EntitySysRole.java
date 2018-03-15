@@ -1,15 +1,17 @@
 package com.sephiroth.jpademo.entity;
 
 
+import com.sephiroth.jpademo.base.jpa.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 @Table(name = "sys_role")
 @Data
-public class EntitySysRole  implements Serializable {
+public class EntitySysRole extends BaseEntity implements Serializable {
 
   
   /**
@@ -83,6 +85,7 @@ public class EntitySysRole  implements Serializable {
    * 角色编码
    */
   @Column(name = "role_code")
+  @NotEmpty
   private String roleCode;
 
   public static final String  _roleCode = "roleCode";
@@ -91,6 +94,7 @@ public class EntitySysRole  implements Serializable {
    * 角色名称
    */
   @Column(name = "role_name")
+  @NotEmpty
   private String roleName;
 
   public static final String  _roleName = "roleName";

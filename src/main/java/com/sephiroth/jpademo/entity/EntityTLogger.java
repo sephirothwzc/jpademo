@@ -1,6 +1,7 @@
 package com.sephiroth.jpademo.entity;
 
 
+import com.sephiroth.jpademo.base.jpa.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_logger")
 @Data
-public class EntityTLogger  implements Serializable {
+public class EntityTLogger extends BaseEntity implements Serializable {
 
   
   /**
